@@ -104,7 +104,7 @@ qq.extend(qq.FileUploaderInput.prototype, {
     _find: function(parent, type){
         var element = qq.getByClass(parent, this._options.classes[type])[0];
         if (!element){
-          alert(type);
+          //alert(type);
             throw new Error('element not found ' + type);
         }
 
