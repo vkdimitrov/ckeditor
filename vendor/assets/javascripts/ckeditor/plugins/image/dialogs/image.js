@@ -190,52 +190,10 @@
                 id: "info",
                 label: d.lang.image.infoTab,
                 accessKey: "I",
-                elements: [{
-                    type: "vbox",
-                    padding: 0,
-                    children: [{
-                        type: "hbox",
-                        widths: ["280px", "110px"],
-                        align: "right",
-                        className: "cke_dialog_image_url",
-                        children: [{
-                            id: "txtUrl",
-                            type: "text",
-                            label: d.lang.common.url,
-                            required: !0,
-                            onChange: function() {
-                                var a = this.getDialog(),
-                                    b = this.getValue();
-                                if (0 < b.length) {
-                                    var a = this.getDialog(),
-                                        c = a.originalElement;
-                                    a.preview && a.preview.removeStyle("display");
-                                    c.setCustomData("isReady", "false");
-                                    var d = CKEDITOR.document.getById(p);
-                                    d && d.setStyle("display", "");
-                                    c.on("load", u, a);
-                                    c.on("error", h, a);
-                                    c.on("abort", h, a);
-                                    c.setAttribute("src", b);
-                                    a.preview && (x.setAttribute("src", b), a.preview.setAttribute("src", x.$.src), e(a))
-                                } else a.preview && (a.preview.removeAttribute("src"), a.preview.setStyle("display",
-                                    "none"))
-                            },
-                            setup: function(a, b) {
-                                if (1 == a) {
-                                    var c = b.data("cke-saved-src") || b.getAttribute("src");
-                                    this.getDialog().dontResetSize = !0;
-                                    this.setValue(c);
-                                    this.setInitValue()
-                                }
-                            },
-                            commit: function(a, b) {
-                                1 == a && (this.getValue() || this.isChanged()) ? (b.data("cke-saved-src", this.getValue()), b.setAttribute("src", this.getValue())) : 8 == a && (b.setAttribute("src", ""), b.removeAttribute("src"))
-                            },
-                            validate: CKEDITOR.dialog.validate.notEmpty(d.lang.image.urlMissing)
-                        }]
-                    }]
-                }, {
+                elements: [{type:"vbox",padding:0,children:[{type:"hbox",widths:["280px","110px"],align:"right",className:"cke_dialog_image_url",children:[{id:"txtUrl",type:"text",label:d.lang.common.url,
+required:!0,onChange:function(){var a=this.getDialog(),b=this.getValue();if(0<b.length){var a=this.getDialog(),c=a.originalElement;a.preview&&a.preview.removeStyle("display");c.setCustomData("isReady","false");var d=CKEDITOR.document.getById(p);d&&d.setStyle("display","");c.on("load",u,a);c.on("error",h,a);c.on("abort",h,a);c.setAttribute("src",b);a.preview&&(x.setAttribute("src",b),a.preview.setAttribute("src",x.$.src),e(a))}else a.preview&&(a.preview.removeAttribute("src"),a.preview.setStyle("display",
+"none"))},setup:function(a,b){if(1==a){var c=b.data("cke-saved-src")||b.getAttribute("src");this.getDialog().dontResetSize=!0;this.setValue(c);this.setInitValue()}},commit:function(a,b){1==a&&(this.getValue()||this.isChanged())?(b.data("cke-saved-src",this.getValue()),b.setAttribute("src",this.getValue())):8==a&&(b.setAttribute("src",""),b.removeAttribute("src"))},validate:CKEDITOR.dialog.validate.notEmpty(d.lang.image.urlMissing)},{type:"button",id:"browse",style:"display:inline-block;margin-top:14px;",
+align:"center",label:d.lang.common.browseServer,hidden:!0,filebrowser:"info:txtUrl"}]}]}, {
                     id: "txtAlt",
                     type: "textarea",
                     label: d.lang.image.alt,
