@@ -11,9 +11,14 @@ class Ckeditor::ApplicationController < Ckeditor.parent_controller.constantize
     asset_response = Ckeditor::AssetResponse.new(asset, request)
 
     if asset.save
-      render asset_response.success(config.relative_url_root)
+      render asset_response.success(config.relative_url_root,
+                                    asset_size_prefix)
     else
       render asset_response.errors
     end
+  end
+
+  def asset_size_prefix
+    nil
   end
 end
