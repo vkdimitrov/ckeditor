@@ -35,4 +35,8 @@ class Ckeditor::PicturesController < Ckeditor::ApplicationController
     model = (@picture || Ckeditor.picture_model)
     @authorization_adapter.try(:authorize, params[:action], model)
   end
+
+  def asset_size_prefix
+    'l'
+  end
 end

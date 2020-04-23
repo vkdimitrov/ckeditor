@@ -35,8 +35,8 @@ module Ckeditor
       @current_mode ||= extract_mode
     end
 
-    def success(relative_url_root = nil)
-      send("success_#{current_mode}", relative_url_root)
+    def success(relative_url_root = nil, size_prefix = nil)
+      send("success_#{current_mode}", relative_url_root, size_prefix)
     end
 
     def errors
@@ -45,19 +45,22 @@ module Ckeditor
 
     private
 
-    def success_json(_relative_url_root = nil)
+    def success_json(_relative_url_root = nil, size_prefix = nil)
+      asset_url = asset.url
+      asset_url = change_size_prefix(asset.url, size_prefix) if size_prefix
+
       {
-        json: { uploaded: 1, fileName: asset.filename, url: asset.url }.to_json
+        json: { uploaded: 1, fileName: asset.filename, url: asset_url }.to_json
       }
     end
 
-    def success_ckeditor(relative_url_root = nil)
+    def success_ckeditor(relative_url_root = nil, _size_prefix = nil)
       {
         html: javascript_tag("#{FUNCTION}(#{params[:CKEditorFuncNum]}, '#{asset_url(relative_url_root)}');")
       }
     end
 
-    def success_default(_relative_url_root = nil)
+    def success_default(_relative_url_root = nil, _size_prefix = nil)
       {
         json: asset.to_json(only: [:id, :type])
       }
@@ -103,6 +106,10 @@ module Ckeditor
       else
         :default
       end
+    end
+
+    def change_size_prefix(asset_url, size_prefix)
+      asset_url.sub(/original_/, "#{size_prefix}_")
     end
   end
 end
