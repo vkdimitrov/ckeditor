@@ -54,10 +54,11 @@ module Ckeditor
       }
     end
 
-    def success_ckeditor(relative_url_root = nil, _size_prefix = nil)
-      {
-        html: javascript_tag("#{FUNCTION}(#{params[:CKEditorFuncNum]}, '#{asset_url(relative_url_root)}');")
-      }
+    def success_ckeditor(relative_url_root = nil, size_prefix = nil)
+      asset_url = asset_url(relative_url_root)
+      asset_url = change_size_prefix(asset_url, size_prefix) if size_prefix
+
+      { html: javascript_tag("#{FUNCTION}(#{params[:CKEditorFuncNum]}, '#{asset_url}');") }
     end
 
     def success_default(_relative_url_root = nil, _size_prefix = nil)
